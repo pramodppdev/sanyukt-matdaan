@@ -2,7 +2,7 @@ package com.sanyukt.matdaan.controller;
 
 
 import com.sanyukt.matdaan.service.VotingService;
-import model.Voting;
+import com.sanyukt.matdaan.model.Voting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

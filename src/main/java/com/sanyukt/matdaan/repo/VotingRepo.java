@@ -1,6 +1,6 @@
 package com.sanyukt.matdaan.repo;
 
-import model.Voting;
+import com.sanyukt.matdaan.model.Voting;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
