@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/main.css">
+
+
+</head>
+<body>
+
+<div class="container" th:fragment="nav">
+
+    <header class="header">
+        <h1>Sanyukt Matdaan</h1>
+        <a href="/exec"><button class="logout-button">Logout</button></a>
+
+    </header>
+
+    <nav class="sidebar">
+        <ul>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/addcandidate">Candidate</a></li>
+            <li><a href="/addcitizen">Citizen</a></li>
+            <li><a href="/admin">Administration</a></li>
+
+        </ul>
+    </nav>
+
+
+</body>
+</html>

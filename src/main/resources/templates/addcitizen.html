@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/form.css">
+  <link rel="stylesheet" href="css/main.css">
+  <title>Form Example</title>
+</head>
+<body>
+<div th:replace="~{fragment/nav :: nav}"> </div>
+
+
+
+<main class="main">
+
+        <div class="container">
+            <h2>Add Citizen</h2>
+            <br>
+            <form action="submit_candidate" method="POST">
+            <div class="grid">
+                <div class="form-field">
+                <label for="aadhaar">Aadhaar:</label>
+                <input type="number" id="aadhaar" name="aadhaar" required>
+                </div>
+            
+                <div class="form-field">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                </div>
+            
+                <div class="form-field">
+                <label for="mobile">Mobile:</label>
+                <input type="number" id="mobile" name="mobile" required>
+                </div>
+            
+                <div class="form-field">
+                <label for="voterId">Voter ID:</label>
+                <input type="text" id="voterId" name="voterId" required>
+                </div>
+            
+                <div class="form-field">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                </div>
+            
+                <div class="form-field">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                </div>
+            </div>
+            
+            <div class="btn">
+                <button type="submit">Submit</button>
+            </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

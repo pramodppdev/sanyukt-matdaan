@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/form.css">
+  <link rel="stylesheet" href="css/main.css">
+
+    <title>Candidate Form</title>
+</head>
+<body>
+<div th:replace="~{fragment/nav :: nav}"> </div>
+
+
+<main class="main">
+        <div class="container">
+            <h2>Add Candidate</h2>
+            <br>
+            <form >
+            <div class="grid">
+                <div class="form-field">
+                <label for="candidate_name">Candidate Name:</label>
+                <input type="text" id="candidate_name" name="candidate_name" required>
+                </div>
+                <div class="form-field">
+                <label for="candidate_area">Candidate Area:</label>
+                <input type="text" id="candidate_area" name="candidate_area" required>
+                </div>
+                <div class="form-field">
+                <label for="candidate_party">Candidate Party:</label>
+                <input type="text" id="candidate_party" name="candidate_party" required>
+                </div>
+                <div class="form-field">
+                <label for="candidate_type">Candidate Type:</label>
+                <input type="text" id="candidate_type" name="candidate_type" required>
+                </div>
+            </div>
+            <br>
+            <div class="btn">
+                <button type="submit">Add Candidate</button>
+            </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
