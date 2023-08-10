@@ -15,12 +15,12 @@ public class CitizenController {
     @Autowired
     private CitizenService citizenService;
     @PostMapping("/save")
-    public ResponseEntity<Citizen> saveExe(@RequestBody Citizen executive){
-        return new ResponseEntity<Citizen>(citizenService.saveCitizen(executive), HttpStatus.CREATED);
+    public ResponseEntity<Citizen> saveCitizen(@RequestBody Citizen citizen){
+        return new ResponseEntity<Citizen>(citizenService.saveCitizen(citizen), HttpStatus.CREATED);
     }
 
-    @GetMapping("/getAllExe")
-    public List<Citizen> getAllExe(){
+    @GetMapping("/getAllCitizen")
+    public List<Citizen> getAllCitizen(){
         return citizenService.getAllCitizen();
     }
 
