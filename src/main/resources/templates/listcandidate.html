@@ -20,12 +20,12 @@
   <h2>Candidates List</h2>
   <table>
     <thead>
-    <th>Aadhaar</th>
-    <th>Name</th>
-    <th>Mobile</th>
-    <th>VoterId</th>
+    <th>Candidate_name</th>
+    <th>Candidate_area</th>
+    <th>Candidate_party</th>
+    <th>Candidate_type</th>
     </thead>
-    <tbody id="citizenList">
+    <tbody id="candidateList">
 
     </tbody>
   </table>
@@ -34,37 +34,32 @@
 
   $(document).ready(function() {
 
-
-
-
-
-
-        var citizenList="";
+        var candidateList="";
         $.ajax({
             contentType: "application/json;charset=UTF-8",
-            url: "/api/citizen/getAllCitizen",
+            url: "/api/candidate/getAllCandidate",
             dataType: "json",
             type: "GET",
             async:false,
             success:function(data){
                for(i=0;i<data.length;i++){
-               citizenList=citizenList+'<tr>';
+               candidateList=candidateList+'<tr>';
 
-               citizenList=citizenList+' <td>'+data[i].aadhaar +'</td>';
-               citizenList=citizenList+' <td>'+data[i].name +'</td>';
-               citizenList=citizenList+' <td>'+data[i].mobile +'</td>';
-               citizenList=citizenList+' <td>'+data[i].voterId +'</td>';
+               candidateList=candidateList+' <td>'+data[i].candidate_name +'</td>';
+               candidateList=candidateList+' <td>'+data[i].candidate_area +'</td>';
+               candidateList=candidateList+' <td>'+data[i].candidate_party +'</td>';
+               candidateList=candidateList+' <td>'+data[i].candidate_type +'</td>';
 
 
-<!--               citizenList=citizenList+' <td>';-->
-<!--               citizenList=citizenList+'<a href="javascript:getProfile(\''+data[i].id+'\')" title="Edit">';-->
-<!--               citizenList=citizenList+'<i>&#9997;&#xFE0E;</i> </a>';-->
-<!--               citizenList=citizenList+'<a href="javascript:deleteProfile(\''+data[i].id+'\')" title="Delete">';-->
-<!--               citizenList=citizenList+'<i>&#x1F441;</i> </a>';-->
-               citizenList=citizenList+'</td></tr>';
+<!--               candidateList=candidateList+' <td>';-->
+<!--               candidateList=candidateList+'<a href="javascript:getProfile(\''+data[i].id+'\')" title="Edit">';-->
+<!--               candidateList=candidateList+'<i>&#9997;&#xFE0E;</i> </a>';-->
+<!--               candidateList=candidateList+'<a href="javascript:deleteProfile(\''+data[i].id+'\')" title="Delete">';-->
+<!--               candidateList=candidateList+'<i>&#x1F441;</i> </a>';-->
+               candidateList=candidateList+'</td></tr>';
 
                }
-                $("#citizenList").html(citizenList);
+                $("#candidateList").html(candidateList);
             }
         });
       });

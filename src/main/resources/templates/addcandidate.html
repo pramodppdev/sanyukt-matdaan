@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/form.css">
   <link rel="stylesheet" href="css/main.css">
     <title>Sanyukt matdaan</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 <body>
@@ -16,31 +17,71 @@
         <div class="container">
             <h2>Add Candidate</h2>
             <br>
-            <form >
+
             <div class="grid">
                 <div class="form-field">
-                <label for="candidate_name">Candidate Name:</label>
-                <input type="text" id="candidate_name" name="candidate_name" required>
+                <label >Candidate Name:</label>
+                <input type="text" id="Candidate_name" >
                 </div>
                 <div class="form-field">
-                <label for="candidate_area">Candidate Area:</label>
-                <input type="text" id="candidate_area" name="candidate_area" required>
+                <label >Candidate Area:</label>
+                <input type="text" id="Candidate_area" >
                 </div>
                 <div class="form-field">
-                <label for="candidate_party">Candidate Party:</label>
-                <input type="text" id="candidate_party" name="candidate_party" required>
+                <label >Candidate Party:</label>
+                <input type="text" id="Candidate_party" >
                 </div>
                 <div class="form-field">
-                <label for="candidate_type">Candidate Type:</label>
-                <input type="text" id="candidate_type" name="candidate_type" required>
+                <label >Candidate Type:</label>
+                <input type="text" id="Candidate_type" >
                 </div>
             </div>
             <br>
             <div class="btn">
-                <button type="submit">Add Candidate</button>
+                <button onclick="saveCandidate()">Add Candidate</button>
             </div>
-            </form>
+
         </div>
     </main>
+<script>
+
+    function saveCandidate() {
+
+            var candidate_name = $("#Candidate_name").val();
+            var candidate_area = $("#Candidate_area").val();
+            var candidate_party = $("#Candidate_party").val();
+            var candidate_type = $("#Candidate_type").val();
+
+
+            var userData = {
+                candidate_name: candidate_name,
+                candidate_area: candidate_area,
+                candidate_party: candidate_party,
+                candidate_type: candidate_type
+
+            };
+
+
+                $.ajax({
+                    contentType: "application/json;charset=UTF-8",
+                    url: "/api/candidate/save",
+                    dataType: "json",
+                    type: "POST",
+                    cache: !1,
+                    processData: !1,
+                    data: JSON.stringify(userData),
+                    complete: function(xhr) {
+                    if (xhr.status === 201) {
+                            window.location.href = "/candidates";
+                        } else {
+                            console.log("Error: " + xhr.status);
+                        }
+                        console.log(data)
+                    }
+                });
+
+            }
+
+</script>
 </body>
 </html>

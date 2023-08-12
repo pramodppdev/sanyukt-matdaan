@@ -8,6 +8,8 @@
 
   <link href="script.js">
   <title>Sanyukt Matdaan</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 <div th:replace="~{fragment/nav :: nav}"> </div>
@@ -16,21 +18,21 @@
 <main class="main">
     <div class="container">
         <h1>Add Executive</h1>
-        <form action="submit_form" method="POST">
+
           <div class="grid">
             <div class="form-field">
-              <label for="username">Username:</label>
-              <input type="text" id="username" name="username" required>
+              <label >Username:</label>
+              <input type="text" id="Username" >
             </div>
           
             <div class="form-field">
-              <label for="password">Password:</label>
-              <input type="password" id="password" name="password" required>
+              <label >Password:</label>
+              <input type="password" id="Password" >
             </div>
           
             <div class="form-field">
-              <label for="mobile">Mobile:</label>
-              <input type="number" id="mobile" name="mobile" required>
+              <label >Mobile:</label>
+              <input type="number" id="Mobile" >
             </div>
           
 <!--            <div class="form-field">-->
@@ -44,30 +46,75 @@
 <!--            </div>-->
           
             <div class="form-field">
-              <label for="executive_name">Executive Name:</label>
-              <input type="text" id="executive_name" name="executive_name" required>
+              <label >Executive Name:</label>
+              <input type="text" id="Executive_name" >
             </div>
           
             <div class="form-field">
-              <label for="designation">Designation:</label>
-              <input type="text" id="designation" name="designation" required>
+              <label >Designation:</label>
+              <input type="text" id="Designation" >
             </div>
           
             <div class="form-field">
-              <label for="area">Area:</label>
-              <input type="text" id="area" name="area" required>
+              <label >Area:</label>
+              <input type="text" id="Area" >
             </div>
           </div>
           
           <div class="btn">
-            <button type="submit">Submit</button>
+            <button onclick="saveExecutive()">Add Executive</button>
           </div>
-        </form>
+
       </div>
     
     
 
   </main>
-  
+<script>
+
+  function saveExecutive() {
+
+          var id = $("#Id").val();
+          var username = $("#Username").val();
+          var password = $("#Password").val();
+          var mobile = $("#Mobile").val();
+          var executive_name = $("#Executive_name").val();
+          var designation = $("#Designation").val();
+          var area = $("#Area").val();
+
+
+          var userData = {
+              id: id,
+              username: username,
+              password: password,
+              mobile: mobile,
+              executive_name: executive_name,
+              designation: designation,
+              area: area
+
+          };
+
+
+              $.ajax({
+                  contentType: "application/json;charset=UTF-8",
+                  url: "/api/executive/save",
+                  dataType: "json",
+                  type: "POST",
+                  cache: !1,
+                  processData: !1,
+                  data: JSON.stringify(userData),
+                  complete: function(xhr) {
+                  if (xhr.status === 201) {
+                            window.location.href = "/admin";
+                        } else {
+                            console.log("Error: " + xhr.status);
+                        }
+                      console.log(data)
+                  }
+              });
+
+          }
+
+</script>
 </body>
 </html>
