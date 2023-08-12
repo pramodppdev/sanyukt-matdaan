@@ -19,7 +19,7 @@ public class DistrictController {
         return new ResponseEntity<District>(districtService.saveDistrict(district), HttpStatus.CREATED);
     }
 
-    @GetMapping("/getAllExe")
+    @GetMapping("/getAllDistrict")
     public List<District> getAllDistrict(){
         return districtService.getAllDistrict();
     }

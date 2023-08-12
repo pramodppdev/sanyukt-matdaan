@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/table.css">
+    <title>Sanyukt matdaan</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+<div th:replace="~{fragment/nav :: nav}"> </div>
+
+
+
+<main class="main">
+
+    <h2>Village List</h2>
+    <table>
+        <thead>
+        <th>Village Name</th>
+        <th>Taluk</th>
+        <th>Ward no</th>
+        <th>Pincode</th>
+        </thead>
+        <tbody id="villageList">
+
+        </tbody>
+    </table>
+</main>
+<script>
+
+    $(document).ready(function() {
+  
+          var villageList="";
+          $.ajax({
+              contentType: "application/json;charset=UTF-8",
+              url: "/api/Village/getAllVillage",
+              dataType: "json",
+              type: "GET",
+              async:false,
+              success:function(data){
+                 for(i=0;i<data.length;i++){
+                 villageList=villageList+'<tr>';
+  
+                 villageList=villageList+' <td>'+data[i].village_name +'</td>';
+                 villageList=villageList+' <td>'+data[i].taluk +'</td>';
+                 villageList=villageList+' <td>'+data[i].ward_no +'</td>';
+                 villageList=villageList+' <td>'+data[i].pincode +'</td>';
+  
+  
+  <!--               villageList=villageList+' <td>';-->
+  <!--               villageList=villageList+'<a href="javascript:getProfile(\''+data[i].id+'\')" title="Edit">';-->
+  <!--               villageList=villageList+'<i>&#9997;&#xFE0E;</i> </a>';-->
+  <!--               villageList=villageList+'<a href="javascript:deleteProfile(\''+data[i].id+'\')" title="Delete">';-->
+  <!--               villageList=villageList+'<i>&#x1F441;</i> </a>';-->
+                 villageList=villageList+'</td></tr>';
+  
+                 }
+                  $("#villageList").html(villageList);
+              }
+          });
+        });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Sanyukt matdaan</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+<div th:replace="~{fragment/nav :: nav}"> </div>
+
+
+
+<main class="main">
+
+    <div class="container">
+        <h2>Add Taluk</h2>
+        <br>
+        <div class="grid">
+            <div class="form-field">
+                <label >Taluk ID:</label>
+                <input type="number" id="Taluk_id"  >
+            </div>
+
+            <div class="form-field">
+                <label >Taluk Name:</label>
+                <input type="text" id="Taluk_name"  >
+            </div>
+
+            <div class="form-field">
+                <label >District:</label>
+                <input type="text" id="District" >
+            </div>
+
+            <div class="form-field">
+                <label >Zone:</label>
+                <input type="text" id="Zone"  >
+            </div>
+
+           
+        </div>
+
+        <div class="btn">
+            <button  onclick="saveTaluk()">Add Taluk</button>
+        </div>
+    </div>
+</main>
+<script>
+
+    function saveTaluk() {
+
+            var taluk_id = $("#Taluk_Id").val();
+            var taluk_name = $("#Taluk_name").val();
+            var district = $("#District").val();
+            var zone = $("#Zone").val();
+
+
+            var userData = {
+                taluk_id: taluk_id,
+                taluk_name: taluk_name,
+                district: district,
+                zone: zone
+
+            };
+
+
+                $.ajax({
+                    contentType: "application/json;charset=UTF-8",
+                    url: "/api/Taluk/save",
+                    dataType: "json",
+                    type: "POST",
+                    cache: !1,
+                    processData: !1,
+                    data: JSON.stringify(userData),
+                    complete: function(xhr) {
+                    if (xhr.status === 201) {
+                            window.location.href = "/admin";
+                        } else {
+                            console.log("Error: " + xhr.status);
+                        }
+
+
+                        console.log(data)
+                    }
+                });
+
+            }
+
+</script>
+</body>
+</html>

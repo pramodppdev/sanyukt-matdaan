@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/table.css">
+    <title>Sanyukt matdaan</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+<div th:replace="~{fragment/nav :: nav}"> </div>
+
+
+
+<main class="main">
+
+    <h2>District List</h2>
+    <table>
+        <thead>
+        <th>District ID</th>
+        <th>District Name</th>
+        <th>State</th>
+        <th>Zone</th>
+        </thead>
+        <tbody id="districtList">
+
+        </tbody>
+    </table>
+</main>
+<script>
+
+    $(document).ready(function() {
+  
+          var districtList="";
+          $.ajax({
+              contentType: "application/json;charset=UTF-8",
+              url: "/api/District/getAllDistrict",
+              dataType: "json",
+              type: "GET",
+              async:false,
+              success:function(data){
+                 for(i=0;i<data.length;i++){
+                 districtList=districtList+'<tr>';
+  
+                 districtList=districtList+' <td>'+data[i].district_id +'</td>';
+                 districtList=districtList+' <td>'+data[i].district_name +'</td>';
+                 districtList=districtList+' <td>'+data[i].state +'</td>';
+                 districtList=districtList+' <td>'+data[i].zone +'</td>';
+  
+  
+  <!--               districtList=districtList+' <td>';-->
+  <!--               districtList=districtList+'<a href="javascript:getProfile(\''+data[i].id+'\')" title="Edit">';-->
+  <!--               districtList=districtList+'<i>&#9997;&#xFE0E;</i> </a>';-->
+  <!--               districtList=districtList+'<a href="javascript:deleteProfile(\''+data[i].id+'\')" title="Delete">';-->
+  <!--               districtList=districtList+'<i>&#x1F441;</i> </a>';-->
+                 districtList=districtList+'</td></tr>';
+  
+                 }
+                  $("#districtList").html(districtList);
+              }
+          });
+        });
+
+
+</script>
+</body>
+</html>

@@ -69,6 +69,35 @@ public class HomeController {
         return "candidate";
     }
 
+    @GetMapping("/adddist")
+    public String addDistrict(){
+        return "adddistrict";
+    }
+
+    @GetMapping("/addtaluk")
+    public String addTaluk(){
+        return "addtaluk";
+    }
+
+    @GetMapping("/addvill")
+    public String addVillage(){
+        return "addvillage";
+    }
+
+    @GetMapping("/listdist")
+    public String listDistrict(){
+        return "listdistrict";
+    }
+
+    @GetMapping("/listtal")
+    public String listTaluk(){
+        return "listtaluk";
+    }
+
+    @GetMapping("/listvill")
+    public String listVillage(){
+        return "listvillage";
+    }
 
 
 
