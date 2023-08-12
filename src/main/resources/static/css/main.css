@@ -85,8 +85,8 @@ body, h1, h2, p, ul, li {
 .card {
     background-color: #4a91a0;
     border: 1px solid #4a91a0;
+    display:flex;
     padding: 1rem;
-    width: calc(30.33% - 1rem);
     border-radius: 8px;
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;

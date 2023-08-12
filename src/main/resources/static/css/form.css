@@ -4,10 +4,9 @@
     box-sizing: border-box;
     font-family: 'poppins', sans-serif;
   }
-  
+
   .container {
     text-align: left;
-    padding: 20px;
   }
   
   .grid {

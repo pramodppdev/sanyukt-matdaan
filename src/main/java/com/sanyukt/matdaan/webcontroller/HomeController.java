@@ -23,6 +23,11 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/citizen")
+    public String citizen(){
+        return "citizen";
+    }
+
     @GetMapping("/admin")
     public String admin(){
         return "admin";
