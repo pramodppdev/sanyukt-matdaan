@@ -4,12 +4,16 @@ import com.sanyukt.matdaan.exception.ResourceNotFoundException;
 import com.sanyukt.matdaan.model.Taluk;
 import com.sanyukt.matdaan.repo.TalukRepo;
 import com.sanyukt.matdaan.service.TalukService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class TalukServiceImpl implements TalukService {
+
+    @Autowired
+
     private TalukRepo talukRepo;
     @Override
     public Taluk saveTaluk(Taluk taluk) {

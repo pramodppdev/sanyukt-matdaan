@@ -1,7 +1,9 @@
 package com.sanyukt.matdaan.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "district")
 public class District {
 
     @Id

@@ -4,12 +4,15 @@ import com.sanyukt.matdaan.exception.ResourceNotFoundException;
 import com.sanyukt.matdaan.model.Village;
 import com.sanyukt.matdaan.repo.VillageRepo;
 import com.sanyukt.matdaan.service.VillageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class VillageServiceImpl implements VillageService {
+    @Autowired
+
     private VillageRepo villageRepo;
     @Override
     public Village saveVillage(Village village) {

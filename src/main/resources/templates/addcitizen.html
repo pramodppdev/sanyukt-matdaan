@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="css/form.css">
   <link rel="stylesheet" href="css/main.css">
   <title>Sanyukt matdaan</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 <div th:replace="~{fragment/nav :: nav}"> </div>
@@ -17,44 +19,79 @@
         <div class="container">
             <h2>Add Citizen</h2>
             <br>
-            <form action="submit_candidate" method="POST">
             <div class="grid">
                 <div class="form-field">
-                <label for="aadhaar">Aadhaar:</label>
-                <input type="number" id="aadhaar" name="aadhaar" required>
+                <label >Aadhaar:</label>
+                <input type="number" id="Aadhaar"  >
                 </div>
             
                 <div class="form-field">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+                <label >Name:</label>
+                <input type="text" id="Name"  >
                 </div>
             
                 <div class="form-field">
-                <label for="mobile">Mobile:</label>
-                <input type="number" id="mobile" name="mobile" required>
+                <label >Mobile:</label>
+                <input type="number" id="Mobile" >
                 </div>
             
                 <div class="form-field">
-                <label for="voterId">Voter ID:</label>
-                <input type="text" id="voterId" name="voterId" required>
+                <label >Voter ID:</label>
+                <input type="text" id="VoterId"  >
                 </div>
             
                 <div class="form-field">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <label >Username:</label>
+                <input type="text" id="Username"  >
                 </div>
             
                 <div class="form-field">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <label >Password:</label>
+                <input type="text" id="Password"  >
                 </div>
             </div>
             
             <div class="btn">
-                <button type="submit">Submit</button>
+                <button  onclick="saveCitizen()">Add Citizen</button>
             </div>
-            </form>
         </div>
     </main>
+<script>
+
+    function saveCitizen() {
+
+            var aadhaar = $("#Aadhaar").val();
+            var name = $("#Name").val();
+            var mobile = $("#Mobile").val();
+            var voterId = $("#voterId").val();
+            var username = $("#Username").val();
+            var password = $("#Password").val();
+
+            var userData = {
+                aadhaar: aadhaar,
+                name: name,
+                mobile: mobile,
+                voterId: voterId,
+                username: username,
+                password: password
+            };
+
+
+                $.ajax({
+                    contentType: "application/json;charset=UTF-8",
+                    url: "/api/citizen/save",
+                    dataType: "json",
+                    type: "POST",
+                    cache: !1,
+                    processData: !1,
+                    data: JSON.stringify(userData),
+                    complete: function(xhr) {
+                        console.log(data)
+                    }
+                });
+
+            }
+
+</script>
 </body>
 </html>

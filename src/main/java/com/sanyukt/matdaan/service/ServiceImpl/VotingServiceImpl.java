@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class VotingServiceImpl implements VotingService {
 
+
     @Autowired
     private VotingRepo votingRepo;
 
