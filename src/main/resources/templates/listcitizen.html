@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/form.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/table.css">
+  <title>Sanyukt matdaan</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+<div th:replace="~{fragment/nav :: nav}"> </div>
+
+
+
+<main class="main">
+
+  <h2>Citizen List</h2>
+  <table>
+    <thead>
+      <th>Aadhaar</th>
+      <th>Name</th>
+      <th>Mobile</th>
+      <th>VoterId</th>
+    </thead>
+    <tbody id="citizenList">
+
+    </tbody>
+  </table>
+</main>
+<script>
+  
+  $(document).ready(function() {
+
+
+
+
+
+
+        var citizenList="";
+        $.ajax({
+            contentType: "application/json;charset=UTF-8",
+            url: "/api/citizen/getAllCitizen",
+            dataType: "json",
+            type: "GET",
+            async:false,
+            success:function(data){
+               for(i=0;i<data.length;i++){
+               citizenList=citizenList+'<tr>';
+
+               citizenList=citizenList+' <td>'+data[i].aadhaar +'</td>';
+               citizenList=citizenList+' <td>'+data[i].name +'</td>';
+               citizenList=citizenList+' <td>'+data[i].mobile +'</td>';
+               citizenList=citizenList+' <td>'+data[i].voterId +'</td>';
+
+
+<!--               citizenList=citizenList+' <td>';-->
+<!--               citizenList=citizenList+'<a href="javascript:getProfile(\''+data[i].id+'\')" title="Edit">';-->
+<!--               citizenList=citizenList+'<i>&#9997;&#xFE0E;</i> </a>';-->
+<!--               citizenList=citizenList+'<a href="javascript:deleteProfile(\''+data[i].id+'\')" title="Delete">';-->
+<!--               citizenList=citizenList+'<i>&#x1F441;</i> </a>';-->
+               citizenList=citizenList+'</td></tr>';
+
+               }
+                $("#citizenList").html(citizenList);
+            }
+        });
+      });
+
+
+</script>
+</body>
+</html>

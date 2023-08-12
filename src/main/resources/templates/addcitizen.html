@@ -63,7 +63,7 @@
             var aadhaar = $("#Aadhaar").val();
             var name = $("#Name").val();
             var mobile = $("#Mobile").val();
-            var voterId = $("#voterId").val();
+            var voterId = $("#VoterId").val();
             var username = $("#Username").val();
             var password = $("#Password").val();
 
@@ -86,6 +86,13 @@
                     processData: !1,
                     data: JSON.stringify(userData),
                     complete: function(xhr) {
+                    if (xhr.status === 201) {
+                            window.location.href = "/citizen";
+                        } else {
+                            console.log("Error: " + xhr.status);
+                        }
+
+
                         console.log(data)
                     }
                 });

@@ -47,4 +47,29 @@ public class HomeController {
     public String addCand(){
         return "addcandidate";
     }
+
+    @GetMapping("/listciti")
+    public String listCitizens(){
+        return "listcitizen";
+    }
+
+    @GetMapping("/listcand")
+    public String listCandidate(){
+        return "listcandidate";
+    }
+
+    @GetMapping("/listexec")
+    public String listExecutives(){
+        return "listexecutive";
+    }
+
+
+    @GetMapping("/candidates")
+    public String candidates(){
+        return "candidate";
+    }
+
+
+
+
 }
