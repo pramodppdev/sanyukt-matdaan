@@ -98,7 +98,9 @@ public class HomeController {
     public String listVillage(){
         return "listvillage";
     }
-
-
+    @GetMapping("/ccl")
+    public String citizenCandList(){
+        return "citizencandlist";
+    }
 
 }

@@ -1,0 +1,38 @@
+.card {
+      width: 200px;
+      height: 150px;
+      border: 1px solid #ccc;
+      padding: 16px;
+      box-shadow: 0px 0px 5px 0px #ccc;
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+.container{
+      margin-top:100px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+}
+
+    .card h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .card p {
+      margin: 5px 0;
+    }
+
+    .vote-button {
+      margin-top: auto;
+      padding: 6px 12px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }

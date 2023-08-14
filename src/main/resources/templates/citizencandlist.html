@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanyukt Matdaan</title>
+    <link rel="stylesheet" href="css/citizencard.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+</head>
+<body>
+
+    <h1 align="center">Sanyukt Matdaan</h1>
+    <h2 align="center">Cast Your Vote</h2>
+
+    <div class="container" id="candidate-container"></div>
+
+
+<script>
+    function populateCandidateCards(data) {
+      var candidateContainer = $("#candidate-container");
+
+      for (var i = 0; i < data.length; i++) {
+        var candidate = data[i];
+
+        var card = $("<div>").addClass("card");
+
+        $("<h3>").text(candidate.candidate_name).appendTo(card);
+        $("<p>").text("Area: " + candidate.candidate_area).appendTo(card);
+        $("<p>").text("Party: " + candidate.candidate_party).appendTo(card);
+        $("<p>").text("Type: " + candidate.candidate_type).appendTo(card);
+        $("<button>")
+          .addClass("vote-button")
+          .text("Vote")
+          .appendTo(card);
+
+        candidateContainer.append(card);
+      }
+    }
+
+    $.ajax({
+      url: "/api/candidate/getAllCandidate",
+      dataType: "json",
+      success: function (data) {
+        populateCandidateCards(data);
+      },
+      error: function (xhr, status, error) {
+        console.error("Error fetching data: " + error);
+      },
+    });
+  </script>
+</body>
+</html>
