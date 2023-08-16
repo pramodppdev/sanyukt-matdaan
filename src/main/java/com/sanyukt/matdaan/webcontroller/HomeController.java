@@ -147,6 +147,8 @@ public class HomeController {
                 // session attributes values
                 session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
                 session.setAttribute("Status", "Succees");
+                session.setAttribute("Checkstatus", citizens.getCheckstatus()); // Set the checkstatus in session attributes
+
                 return "en";
             }
         }catch (AuthenticationException e){

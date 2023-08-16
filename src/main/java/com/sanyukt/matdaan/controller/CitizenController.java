@@ -1,5 +1,6 @@
 package com.sanyukt.matdaan.controller;
 
+import com.sanyukt.matdaan.exception.ResourceNotFoundException;
 import com.sanyukt.matdaan.model.Citizen;
 import com.sanyukt.matdaan.service.CitizenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,17 @@ public class CitizenController {
     public ResponseEntity<String> deleteExe(@PathVariable String id) {
         citizenService.deleteCitizen(id);
         return new ResponseEntity<String>("Citizen Deleted Successfully", HttpStatus.OK);
+    }
+
+    @PutMapping("/updateStatus/{voterId}")
+    public ResponseEntity<String> updateCitizenStatus(@PathVariable String voterId) {
+        try {
+            citizenService.updateStatus(voterId);
+            return ResponseEntity.ok("Status updated successfully.");
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating status.");
+        }
     }
 }

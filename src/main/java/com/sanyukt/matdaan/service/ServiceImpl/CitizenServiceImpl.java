@@ -2,7 +2,6 @@ package com.sanyukt.matdaan.service.ServiceImpl;
 
 import com.sanyukt.matdaan.exception.ResourceNotFoundException;
 import com.sanyukt.matdaan.model.Citizen;
-import com.sanyukt.matdaan.pojo.CitizenVO;
 import com.sanyukt.matdaan.repo.CitizenRepo;
 import com.sanyukt.matdaan.service.CitizenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,20 @@ public class CitizenServiceImpl implements CitizenService {
     private CitizenRepo citizenRepo;
     @Override
     public Citizen saveCitizen(Citizen citizen) {
+        citizen.setCheckstatus(0);
         return citizenRepo.save(citizen);
+    }
+
+    @Override
+    public void updateStatus(String voterId) {
+        Citizen citizen = citizenRepo.findAllByVoterId(voterId);
+
+        if (citizen == null) {
+            throw new ResourceNotFoundException("Citizen", "Voter ID", voterId);
+        }
+
+        citizen.setCheckstatus(1); // Update citizen status to 1
+        citizenRepo.save(citizen);
     }
 
     @Override
@@ -42,7 +54,7 @@ public class CitizenServiceImpl implements CitizenService {
     @Override
     public Citizen citizenAuth(Citizen citizen) throws AuthenticationException {
 
-        if (StringUtils.isEmpty(citizen.getVoterId()) || StringUtils.isEmpty(citizen.getPassword())) {
+        if (StringUtils.isEmpty(citizen.getVoterId()) || StringUtils.isEmpty(citizen.getPassword()) || StringUtils.isEmpty(citizen.getCheckstatus()) )  {
             throw new AuthenticationException("Invalid user credentials");
         }
 
@@ -53,7 +65,8 @@ public class CitizenServiceImpl implements CitizenService {
         }
 
         if (Objects.equals(citizen.getPassword(), authenticatedPOJO.getPassword())) {
-            authenticatedPOJO.setPassword(""); // Clear the password before returning
+            authenticatedPOJO.setPassword("");
+            authenticatedPOJO.getCheckstatus();
             return authenticatedPOJO;
         }
 

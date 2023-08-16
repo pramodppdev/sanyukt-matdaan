@@ -3,20 +3,20 @@ package com.sanyukt.matdaan.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "votepramod")
+@Document(collection = "vote")
 public class Voting {
     @Id
     private String id;
-    private String name;
-    private String cast;
+    private String partyname;
+    private Long voteCount;
 
     public Voting() {
     }
 
-    public Voting(String id, String name, String cast) {
+    public Voting(String id, String partyname, Long voteCount) {
         this.id = id;
-        this.name = name;
-        this.cast = cast;
+        this.partyname = partyname;
+        this.voteCount = voteCount;
     }
 
     public String getId() {
@@ -27,19 +27,19 @@ public class Voting {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPartyname() {
+        return partyname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPartyname(String partyname) {
+        this.partyname = partyname;
     }
 
-    public String getCast() {
-        return cast;
+    public Long getVoteCount() {
+        return voteCount;
     }
 
-    public void setCast(String cast) {
-        this.cast = cast;
+    public void setVoteCount(Long voteCount) {
+        this.voteCount = voteCount;
     }
 }

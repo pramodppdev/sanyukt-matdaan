@@ -33,4 +33,14 @@ public class CandidateServiceImpl implements CandidateService {
         candidateRepo.findById(id).orElseThrow(()->  new ResourceNotFoundException("Candidate","Id",id));
         candidateRepo.deleteById(id);
     }
+
+    @Override
+    public void increaseVoteCount(String id) {
+        Candidate candidate = candidateRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Candidate", "Id", id));
+
+        candidate.setVotes(candidate.getVotes() + 1);
+        candidateRepo.save(candidate);
+    }
+
 }

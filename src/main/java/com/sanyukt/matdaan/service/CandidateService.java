@@ -15,4 +15,6 @@ public interface CandidateService {
     Candidate getById(String id);
 
     void deleteCandidate(String id);
+
+    void increaseVoteCount(String id);
 }

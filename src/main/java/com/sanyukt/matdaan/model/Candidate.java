@@ -10,15 +10,17 @@ public class Candidate {
     private String candidate_area;
     private String candidate_party;
     private String candidate_type;
+    private long votes;
 
     public Candidate() {
     }
 
-    public Candidate(String candidate_name, String candidate_area, String candidate_party, String candidate_type) {
+    public Candidate(String candidate_name, String candidate_area, String candidate_party, String candidate_type, long votes) {
         this.candidate_name = candidate_name;
         this.candidate_area = candidate_area;
         this.candidate_party = candidate_party;
         this.candidate_type = candidate_type;
+        this.votes = votes;
     }
 
     public String getCandidate_name() {
@@ -51,5 +53,13 @@ public class Candidate {
 
     public void setCandidate_type(String candidate_type) {
         this.candidate_type = candidate_type;
+    }
+
+    public long getVotes() {
+        return votes;
+    }
+
+    public void setVotes(long votes) {
+        this.votes = votes;
     }
 }

@@ -13,17 +13,19 @@ public class Citizen {
     private String voterId;
     private String username;
     private String password;
+    private int checkstatus;
 
     public Citizen() {
     }
 
-    public Citizen(long aadhaar, String name, long mobile, String voterId, String username, String password) {
+    public Citizen(long aadhaar, String name, long mobile, String voterId, String username, String password, int status) {
         this.aadhaar = aadhaar;
         this.name = name;
         this.mobile = mobile;
         this.voterId = voterId;
         this.username = username;
         this.password = password;
+        this.checkstatus = status;
     }
 
     public long getAadhaar() {
@@ -72,5 +74,13 @@ public class Citizen {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getCheckstatus() {
+        return checkstatus;
+    }
+
+    public void setCheckstatus(int checkstatus) {
+        this.checkstatus = checkstatus;
     }
 }

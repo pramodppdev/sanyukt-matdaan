@@ -9,56 +9,54 @@
   <title>Sanyukt matdaan</title>
 </head>
 <body>
-  <div class="login-container">
-    <div class="card">
-      <h2>Sanyukt Matdaan</h2>
-      <h2>Login</h2>
-      <form>
-        <input type="text" placeholder="Aadhaar ID or Voter ID" id="VoterIdOrAadhar" >
-        <input type="password" placeholder="Password" id="Password">
-        <input type="button" value="Login" onclick="login()">
-      </form>
-    </div>
+<div class="login-container">
+  <div class="card">
+    <h2>Sanyukt Matdaan</h2>
+    <h2>Login</h2>
+    <form>
+      <input type="text" placeholder="Aadhaar ID or Voter ID" id="VoterIdOrAadhar" >
+      <input type="password" placeholder="Password" id="Password">
+      <input type="button" value="Login" onclick="login()">
+    </form>
   </div>
+</div>
 <script>
   function login() {
+    var voterId = $("#VoterIdOrAadhar").val();
+    var password = $("#Password").val();
 
-            var voterId = $("#VoterIdOrAadhar").val();
-            var password = $("#Password").val();
+    var citizen = {
+      voterId: voterId,
+      password: password
+    };
 
+    $.ajax({
+      contentType: "application/json;charset=UTF-8",
+      url: "/auth/citizen",
+      dataType: "json",
+      type: "POST",
+      async: false,
+      cache: false,
+      processData: false,
+      data: JSON.stringify(citizen),
+      complete: function (xhr) {
+        if (xhr.status === 200) {
+          console.log(xhr);
 
-            var citizen = {
-                voterId: voterId,
-                password: password
-
-            };
-
-
-                $.ajax({
-                    contentType: "application/json;charset=UTF-8",
-                    url: "/auth/citizen",
-                    dataType: "json",
-                    type: "POST",
-                    async:false,
-                    cache: !1,
-                    processData: !1,
-                    data: JSON.stringify(citizen),
-                    complete: function(xhr) {
-                    if (xhr.status === 200) {
-                                       console.log(xhr)
-
-                            window.location.href = "/ccl";
-                        } else {
-                            alert("Invalid credentials");
-                            console.log("Error: " + xhr.status);
-                        }
-
-
-                    }
-                });
-
-            }
+          var response = xhr.responseJSON; // Get the response JSON object
+          if (response && response.status === 1) {
+            alert("You have already cast your vote. You cannot vote again.");
+            window.location.href = "/";
+          } else {
+            window.location.href = "/ccl?loggedInVoterId=" + voterId;
+          }
+        } else {
+          alert("Invalid credentials");
+          console.log("Error: " + xhr.status);
+        }
+      },
+    });
+  }
 </script>
 </body>
-
 </html>

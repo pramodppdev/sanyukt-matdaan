@@ -12,6 +12,8 @@ public interface CitizenService {
 
     Citizen saveCitizen(Citizen citizen);
 
+    void updateStatus(String voterId);
+
     List<Citizen> getAllCitizen();
 
     Citizen getById(String id);
