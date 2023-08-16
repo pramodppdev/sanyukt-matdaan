@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <title>Title</title>
     <link rel="stylesheet" href="css/main.css">
-
-
 </head>
 <body>
 
@@ -13,7 +13,7 @@
 
     <header class="header">
         <h1>Sanyukt Matdaan</h1>
-        <a href="/exec"><button class="logout-button">Logout</button></a>
+        <button class="logout-button" onclick="logout()">Logout</button>
 
     </header>
 
@@ -26,6 +26,27 @@
 
         </ul>
     </nav>
+</div>
+<script>
+
+    function logout(){
+
+            $.ajax({
+            type: "GET",
+            url: "/logout",
+            success: function () {
+                window.location.href = "/";
+            },
+            error: function (xhr, status, error) {
+                console.log("Error occurred during logout:", status, error);
+                console.log("Response text:", xhr.responseText);
+            }
+        });
+
+    }
+
+</script>
+
 
 
 </body>

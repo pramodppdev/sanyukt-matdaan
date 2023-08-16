@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/login.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <title>Sanyukt matdaan</title>
 </head>
 <body>
@@ -12,11 +14,49 @@
       <h2>Sanyukt Matdaan</h2>
       <h2>Login</h2>
       <form>
-        <input type="text" placeholder="Username" >
-        <input type="password" placeholder="Password" >
-        <a href="/index"><input type="button" value="Login"></a>
+        <input type="text" placeholder="Username"  id="Username">
+        <input type="password" placeholder="Password"  id="Password">
+        <input type="button" value="Login" onclick="login()">
       </form>
     </div>
   </div>
+  <script>
+  function login() {
+
+            var username = $("#Username").val();
+            var password = $("#Password").val();
+
+
+            var citizenVo = {
+                username: username,
+                password: password
+
+            };
+
+
+                $.ajax({
+                    contentType: "application/json;charset=UTF-8",
+                    url: "/auth/exec",
+                    dataType: "json",
+                    type: "POST",
+                    cache: !1,
+                    async:false,
+                    processData: !1,
+                    data: JSON.stringify(citizenVo),
+                    complete: function(xhr) {
+                    if (xhr.status === 200) {
+                                       console.log(xhr)
+
+                            window.location.href = "/index";
+                        } else {
+                            console.log("Error: " + xhr.status);
+                        }
+
+
+                    }
+                });
+
+            }
+</script>
 </body>
 </html>

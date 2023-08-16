@@ -1,8 +1,27 @@
 package com.sanyukt.matdaan.webcontroller;
 
+import com.sanyukt.matdaan.model.Citizen;
+import com.sanyukt.matdaan.pojo.CitizenVO;
+import com.sanyukt.matdaan.pojo.ExectiveVO;
+import com.sanyukt.matdaan.service.CitizenService;
+import com.sanyukt.matdaan.service.ExecutiveService;
+import com.sanyukt.matdaan.service.ServiceImpl.CitizenServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.naming.AuthenticationException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -103,4 +122,84 @@ public class HomeController {
         return "citizencandlist";
     }
 
+    @Autowired
+    CitizenService citizenService;
+
+    @PostMapping("/auth/citizen")
+    @ResponseBody
+    public String citizenAuth(HttpServletRequest request, HttpServletResponse response, @RequestBody Citizen citizen) throws AuthenticationException
+    {
+        try {
+            Citizen citizens = citizenService.citizenAuth(citizen);
+            System.out.println(citizen);
+
+            if (citizens != null) {
+                HttpSession session = request.getSession(true);
+
+                List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+                authorities.add(new SimpleGrantedAuthority("USER"));
+
+                // unique authentication token
+                Authentication myToken = new UsernamePasswordAuthenticationToken(citizen.getVoterId(), citizen.getPassword(), authorities);
+                SecurityContext context = SecurityContextHolder.createEmptyContext();
+                context.setAuthentication(myToken);
+
+                // session attributes values
+                session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
+                session.setAttribute("Status", "Succees");
+                return "en";
+            }
+        }catch (AuthenticationException e){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            throw new AuthenticationException("Invalid Credentials");
+        }
+        return "fail";
+    }
+
+    @Autowired
+    ExecutiveService executiveService;
+    @PostMapping("/auth/exec")
+    @ResponseBody
+    public String exeAuth(HttpServletRequest request, HttpServletResponse response, @RequestBody ExectiveVO exectiveVO) throws AuthenticationException
+    {
+        try {
+            ExectiveVO exective = executiveService.exeAuth(exectiveVO);
+
+            if (exective != null) {
+                HttpSession session = request.getSession(true);
+
+                List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+                authorities.add(new SimpleGrantedAuthority("USER"));
+
+                // unique authentication token
+                Authentication myToken = new UsernamePasswordAuthenticationToken(exective.getUsername(), exective.getPassword(), authorities);
+                SecurityContext context = SecurityContextHolder.createEmptyContext();
+                context.setAuthentication(myToken);
+
+                // session attributes values
+                session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
+                session.setAttribute("Status", "Succees");
+                return "sucess";
+            }
+        }catch (AuthenticationException e){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            throw new AuthenticationException("Invalid Credentials");
+        }
+        return "fail";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse respons){
+        request.getSession(false).removeAttribute("USER");
+        request.getSession(false).invalidate();
+        return "/";
+    }
+
+
+
+
 }
+
+
+
+
