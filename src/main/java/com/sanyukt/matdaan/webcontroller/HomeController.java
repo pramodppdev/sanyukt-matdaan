@@ -88,6 +88,11 @@ public class HomeController {
         return "candidate";
     }
 
+    @GetMapping("/results")
+    public String results(){
+        return "results";
+    }
+
     @GetMapping("/adddist")
     public String addDistrict(){
         return "adddistrict";
